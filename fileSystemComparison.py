@@ -7,8 +7,37 @@
 #Desc:
 #   This program generates a hundered files in two system types: single level and hierarchical.
 #   
-#Q1: ***
-#Q2: ***
+#Q1: The two file systems share many similarities in thier output, however they have a few key differences
+# due to the nature of their respective architectures. Firstly between the two systems, the number of files
+# is the same at 100 files. This makes sense as directories are not considered files and both systesm stor the same files.
+# Both systems also have the same average file size for these files of 0 bytes. This again follows from both systesm using the same
+# files. 
+#    The outputs of the two systems lies within the traversal time each system takes, and the average directory size within each system.
+# For the single level system it contains no directories and as such the average directory size is not applicable. 
+# Meanwhile, for the hierarchical system it has average directory sizes of 4 kilobytes. This average direcotry size is for the inode
+# which contains the files associated with the director, but not their actual data. And can be though of as
+# part of the overhead of the hierarchcial system. This helps to explain the next main difference in the outputs
+# which is the file system traversal time. The actual times are machine and run dependent however 
+# the values given show that the hierarchical system takes around 2.25 - 2.5 times longer than single level 
+# system. This difference primarily results from the fact that the program must traverse all the directories,
+# plus the files within them in the hierarchical, whereas the single level system only has to traverse the files.
+# This leads to the hierarchical system having to traverse 10 more objects than the single level. Aditionally, as previously noted
+# these objects are larger and more complex than the file objects and add a layer of latency between the root and the files.
+# This added overhead and latency resuilts in the hierarchical system taking substantially longer to
+# find all the files then the single level system does. In conclusion the two systems are similar in thier file statistice,
+# however differ substantially in their traversal times due to increased overhead/latency in the hierarchical system. 
+#
+#Q2: To implement a hierarchical like system in this simple file system we could append a theoretical directory name to the beginning of each of
+# the files and use a symbol to separate the directory name from the file name. An example of this strategem is dirnam_filenam.ext .
+# This sytem would allow for directory lookups through approximate file paths utilizing the dirname and returning all contents under the approximate path
+# only using the directory name. This stratagem can also trivilarly extended to support subdirectories. And for both scenaros files/directories would ether require
+# that they be in the equivalent root, or that they have their full path from the root to where they are: e.g. root_dirname or root_filename.ext.
+# This maintains several of the features of a hierarchial system such as directory-file relationships, multiple files with the same name(as long as they are in
+# different directories), different directories sub-directories with the same name, and a hierarchical nature. On extra benefit of this system would be that given
+# just a file name, you could compute any theoretical path to a file with that name, relativly efficently.
+# This system would add increased overhead in the extra space in file names, as well as
+# the extra search time for considering this theroetical directory path to the file, however it is possible to
+# implement within the confines of the given system.
 
 import os
 import time
